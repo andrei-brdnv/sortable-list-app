@@ -2,7 +2,7 @@ import {
     FETCH_DATA,
     START,
     SUCCESS,
-    FAIL, SORT_DATA,
+    FAIL, SORT_DATA, ADD_USER_ITEM, PAGINATE
 } from "../types";
 
 import { replace } from "connected-react-router";
@@ -65,3 +65,17 @@ export const sortData = (sortField) => ({
     type: SORT_DATA,
     payload: {sortField}
 })
+
+export const addUserItem = (userItem) => {
+    return {
+        type: ADD_USER_ITEM,
+        payload: {userItem}
+    }
+}
+
+export const paginate = (page) => {
+    return {
+        type: PAGINATE,
+        payload: {page}
+    }
+}

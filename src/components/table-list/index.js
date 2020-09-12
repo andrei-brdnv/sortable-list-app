@@ -34,7 +34,7 @@ export default props => {
                 </TableHead>
                 <TableBody>
                     <DataItem
-                        data={props.data.fetchedData}
+                        data={props.data}
                     />
                 </TableBody>
             </Table>

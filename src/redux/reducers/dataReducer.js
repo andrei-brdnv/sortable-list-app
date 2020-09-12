@@ -1,6 +1,6 @@
-import {FAIL, FETCH_DATA, SORT_DATA, START, SUCCESS,} from "../types";
+import {FAIL, FETCH_DATA, SORT_DATA, START, SUCCESS, ADD_USER_ITEM, PAGINATE} from "../types";
 
-import {orderBy} from "lodash";
+import {orderBy, chunk} from "lodash";
 
 const initialState = {
     fetchedData: [],
@@ -9,7 +9,10 @@ const initialState = {
     error: null,
     isDataSelected: false,
     sort: '',
-    sortField: ''
+    sortField: '',
+    currentPage: 1,
+    perPage: 50,
+    currentItems: []
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -22,11 +25,13 @@ export const dataReducer = (state = initialState, action) => {
             }
 
         case FETCH_DATA + SUCCESS:
+
+
             return {
                 ...state,
                 fetchedData: response,
                 loading: false,
-                loaded: true
+                loaded: true,
             }
 
         case FETCH_DATA + FAIL:
@@ -47,6 +52,18 @@ export const dataReducer = (state = initialState, action) => {
                 fetchedData: orderedData,
                 sort: sortType,
                 sortField: payload.sortField
+            }
+
+        case ADD_USER_ITEM:
+            return {
+                ...state,
+                fetchedData: [payload.userItem, ...state.fetchedData]
+            }
+
+        case PAGINATE:
+            return {
+                ...state,
+                currentPage: payload.page,
             }
 
         default:
