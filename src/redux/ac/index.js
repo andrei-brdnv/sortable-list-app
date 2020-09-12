@@ -2,7 +2,7 @@ import {
     FETCH_DATA,
     START,
     SUCCESS,
-    FAIL,
+    FAIL, SORT_DATA,
 } from "../types";
 
 import { replace } from "connected-react-router";
@@ -60,3 +60,8 @@ export function fetchBigData() {
             })
     }
 }
+
+export const sortData = (sortField) => ({
+    type: SORT_DATA,
+    payload: {sortField}
+})
