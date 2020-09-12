@@ -1,0 +1,1 @@
+export const fetchedDataSelector = (store) => store.data.fetchedData

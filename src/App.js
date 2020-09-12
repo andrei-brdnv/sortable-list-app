@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {fetchBigData, fetchSmallData} from "./redux/ac";
+import TableList from "./components/table";
+import { fetchedDataSelector } from "./selectors";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    render() {
+        return (
+            <div className="App">
+                <button onClick={() => this.props.fetchSmallData()}>Загрузить маленький объем данных (32 элемента)</button>
+                <button onClick={() => this.props.fetchBigData()}>Загрузить большой объем данных (1000 элементов)</button>
+                <TableList data={this.props.data} />
+            </div>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = store => ({
+    data: fetchedDataSelector(store)
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchSmallData: () => dispatch(fetchSmallData()),
+    fetchBigData: () => dispatch(fetchBigData())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
