@@ -16,9 +16,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default props => {
     const classes = useStyles()
+
+    const pageCount = Math.ceil(props.data.fetchedData.length / props.data.perPage)
+
     return (
         <div className={classes.root}>
-            <Pagination count={20} page={props.currentPage} onChange={props.handlePageClick} >
+            <Pagination count={pageCount} page={props.data.currentPage} onChange={props.handlePageClick} >
             </Pagination>
 
             {/*<ReactPaginate

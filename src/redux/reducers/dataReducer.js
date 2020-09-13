@@ -1,4 +1,4 @@
-import {FAIL, FETCH_DATA, SORT_DATA, START, SUCCESS, ADD_USER_ITEM, PAGINATE} from "../types";
+import {FAIL, FETCH_DATA, SORT_DATA, START, SUCCESS, ADD_USER_ITEM, PAGINATE, SEARCH} from "../types";
 
 import {orderBy, chunk} from "lodash";
 
@@ -12,7 +12,8 @@ const initialState = {
     sortField: '',
     currentPage: 1,
     perPage: 50,
-    currentItems: []
+    currentItems: [],
+    search: ''
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -64,6 +65,11 @@ export const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentPage: payload.page,
+            }
+        case SEARCH:
+            return {
+                ...state,
+                search: payload.search
             }
 
         default:

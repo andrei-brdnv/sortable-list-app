@@ -2,7 +2,7 @@ import {
     FETCH_DATA,
     START,
     SUCCESS,
-    FAIL, SORT_DATA, ADD_USER_ITEM, PAGINATE
+    FAIL, SORT_DATA, ADD_USER_ITEM, PAGINATE, SEARCH
 } from "../types";
 
 import { replace } from "connected-react-router";
@@ -77,5 +77,13 @@ export const paginate = (page) => {
     return {
         type: PAGINATE,
         payload: {page}
+    }
+}
+
+export const getSearchData = (search) => {
+    console.log(search)
+    return {
+        type: SEARCH,
+        payload: {search}
     }
 }

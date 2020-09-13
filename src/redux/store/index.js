@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import reducer from "../reducers";
 import logger from "../middleware/logger";
+import search from "../middleware/search";
 
 const composeEnhancers =
     typeof window === 'object' &&
