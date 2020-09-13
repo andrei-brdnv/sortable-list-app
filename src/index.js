@@ -4,7 +4,6 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import {ConnectedRouter} from "connected-react-router";
 
 ReactDOM.render(
     <Provider store={store}>

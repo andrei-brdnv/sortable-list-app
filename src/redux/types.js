@@ -3,7 +3,7 @@ export const ADD_USER_ITEM = 'ADD_USER_ITEM'
 export const SORT_DATA = 'SORT_DATA'
 export const PAGINATE = 'PAGINATE'
 export const SEARCH = 'SEARCH'
-export const ADD_MODE = 'ADD_MODE'
+export const TOGGLE_ADD_FORM = 'TOGGLE_ADD_FORM'
 
 export const START = '_START'
 export const SUCCESS = '_SUCCESS'

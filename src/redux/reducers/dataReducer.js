@@ -1,4 +1,4 @@
-import {FAIL, FETCH_DATA, SORT_DATA, START, SUCCESS, ADD_USER_ITEM, PAGINATE, SEARCH, ADD_MODE} from "../types";
+import {FAIL, FETCH_DATA, SORT_DATA, START, SUCCESS, ADD_USER_ITEM, PAGINATE, SEARCH, TOGGLE_ADD_FORM} from "../types";
 
 import {orderBy, chunk} from "lodash";
 
@@ -14,7 +14,7 @@ const initialState = {
     perPage: 50,
     currentItems: [],
     search: '',
-    isAdding: false
+    showAddForm: false
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -33,7 +33,7 @@ export const dataReducer = (state = initialState, action) => {
                 ...state,
                 fetchedData: response,
                 loading: false,
-                loaded: true,
+                loaded: true
             }
 
         case FETCH_DATA + FAIL:
@@ -72,10 +72,10 @@ export const dataReducer = (state = initialState, action) => {
                 ...state,
                 search: payload.search
             }
-        case ADD_MODE:
+        case TOGGLE_ADD_FORM:
             return {
                 ...state,
-                isAdding: !state.isAdding
+                showAddForm: !state.showAddForm
             }
 
         default:

@@ -8,7 +8,9 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
     button: {
-        borderRadius: 0
+        borderRadius: 0,
+        margin: '10px auto',
+        backgroundColor: '#9ccc65'
     }
 });
 
@@ -70,11 +72,10 @@ class TableForm extends Component {
                     <Button
                         className={classes.button}
                         variant="contained"
-                        color="primary"
                         disabled={!this.isValidForm()}
                         onClick={this.handleSubmit}
                     >
-                        Add
+                        Добавить
                     </Button>
                 </div>
             </form>

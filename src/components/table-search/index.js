@@ -7,7 +7,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     button: {
-        borderRadius: 0
+        borderRadius: 0,
+        boxShadow: 'none',
+        backgroundColor: '#ffa726'
     }
 });
 
@@ -22,7 +24,7 @@ export default props => {
 
     return (
         <div className="search-container">
-            <Button className={classes.button} variant="contained" color="primary" onClick={() => props.handleSearch(value)}>
+            <Button className={classes.button} variant="contained" onClick={() => props.handleSearch(value)}>
                 Найти
             </Button>
             <input

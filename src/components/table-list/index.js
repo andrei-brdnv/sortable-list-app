@@ -8,12 +8,16 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import "./style.css"
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        fontSize: 14,
+        fontWeight: 600,
+        backgroundColor: '#757575',
         color: theme.palette.common.white,
-        cursor: 'pointer'
     },
     body: {
         fontSize: 14,
@@ -25,33 +29,42 @@ const StyledTableRow = withStyles((theme) => ({
     root: {
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.action.hover,
+            cursor: 'pointer'
         },
     },
 }))(TableRow);
 
-const useStyles = makeStyles({
-    table: {
-        margin: '0 auto',
-        maxWidth: 900,
-    },
-    row: {
-
-    }
-});
-
 export default props => {
-    const classes = useStyles();
-
     return (
         <TableContainer>
-            <Table className={classes.table} size="small" aria-label="a dense table">
-                <TableHead className={classes.row}>
+            <Table size="small" aria-label="a dense table">
+                <TableHead>
                     <StyledTableRow>
-                        <StyledTableCell onClick={() => props.onSort('id')}>ID</StyledTableCell>
-                        <StyledTableCell onClick={() => props.onSort('firstName')} align="left">First name</StyledTableCell>
-                        <StyledTableCell onClick={() => props.onSort('lastName')} align="left">Last name</StyledTableCell>
-                        <StyledTableCell onClick={() => props.onSort('email')} align="left">Email</StyledTableCell>
-                        <StyledTableCell onClick={() => props.onSort('phone')} align="left">Phone</StyledTableCell>
+                        <StyledTableCell onClick={() => props.onSort('id')}>
+                            ID {props.directionData.sort === 'asc'
+                            ? <FontAwesomeIcon className="icon" icon="angle-up"/>
+                            : <FontAwesomeIcon className="icon" icon="angle-down"/>}
+                        </StyledTableCell>
+                        <StyledTableCell onClick={() => props.onSort('firstName')} align="left">
+                            First name {props.directionData.sort === 'asc'
+                            ? <FontAwesomeIcon className="icon" icon="angle-up"/>
+                            : <FontAwesomeIcon className="icon" icon="angle-down"/>}
+                        </StyledTableCell>
+                        <StyledTableCell onClick={() => props.onSort('lastName')} align="left">
+                            Last name {props.directionData.sort === 'asc'
+                            ? <FontAwesomeIcon className="icon" icon="angle-up"/>
+                            : <FontAwesomeIcon className="icon" icon="angle-down"/>}
+                        </StyledTableCell>
+                        <StyledTableCell onClick={() => props.onSort('email')} align="left">
+                            Email {props.directionData.sort === 'asc'
+                            ? <FontAwesomeIcon className="icon" icon="angle-up"/>
+                            : <FontAwesomeIcon className="icon" icon="angle-down"/>}
+                        </StyledTableCell>
+                        <StyledTableCell onClick={() => props.onSort('phone')} align="left">
+                            Phone {props.directionData.sort === 'asc'
+                            ? <FontAwesomeIcon className="icon" icon="angle-up"/>
+                            : <FontAwesomeIcon className="icon" icon="angle-down"/>}
+                        </StyledTableCell>
                     </StyledTableRow>
                 </TableHead>
                 <TableBody>

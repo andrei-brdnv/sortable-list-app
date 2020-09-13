@@ -7,12 +7,11 @@ import Button from '@material-ui/core/Button';
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 
 const useStyles = makeStyles({
-    buttonSmall: {
-        marginBottom: '10px',
-        backgroundColor: '#aed581'
-    },
-    buttonBig: {
-        backgroundColor: '#e57373'
+    button: {
+        display: 'flex',
+        justifyContent: 'left',
+        marginBottom: '20px',
+        backgroundColor: '#9ccc65'
     },
     container: {
         display: 'flex',
@@ -31,7 +30,7 @@ export default (props) => {
     return (
         <Container className={classes.container} maxWidth="sm">
             <Button
-                className={classes.buttonSmall}
+                className={classes.button}
                 variant="contained"
                 onClick={props.onSelectSmall}
             >
@@ -39,7 +38,7 @@ export default (props) => {
                 Загрузить маленький объем данных <b style={{ marginLeft: '5px' }}>(32 элемента)</b>
             </Button>
             <Button
-                className={classes.buttonBig}
+                className={classes.button}
                 onClick={props.onSelectBig}
                 variant="contained"
             >

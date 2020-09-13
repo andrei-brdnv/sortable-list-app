@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import {fetchBigData, fetchSmallData, sortData, paginate, getSearchData, isAdding} from "./redux/ac";
+import {fetchBigData, fetchSmallData, sortData, paginate, getSearchData, showAddForm} from "./redux/ac";
 import TableList from "./components/table-list";
 import DataSelector from "./components/data-selector"
 import {fetchedDataSelector, filteredDataPaginationSelector, filteredDataSelector} from "./selectors";
@@ -13,18 +13,25 @@ import Loader from "./components/loader";
 import Container from '@material-ui/core/Container';
 import Button from "@material-ui/core/Button";
 import "./App.css"
-
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { withStyles } from "@material-ui/core/styles";
+
+library.add(faAngleUp, faAngleDown)
+
+
 
 const styles = theme => ({
     container: {
+        maxWidth: '1000px',
         paddingTop: '50px'
     },
     isAddingButton: {
         display: 'block',
         width: '250px',
-        margin: '10px auto',
-        borderRadius: 0
+        margin: '20px auto',
+        borderRadius: 0,
+        backgroundColor: '#ffa726'
     }
 });
 
@@ -55,12 +62,13 @@ class App extends Component {
                 {
                     this.props.data.loaded ? (
                         <Fragment>
-                            <Button className={classes.isAddingButton} variant="contained" color="primary" onClick={this.handleAddingMode}>Добавить ряд в таблицу</Button>
+                            <Button className={classes.isAddingButton} variant="contained" onClick={this.handleShowAddForm}>Добавить ряд в таблицу</Button>
                             {
-                                this.props.data.isAdding ? <TableForm /> : null
+                                this.props.data.showAddForm ? <TableForm /> : null
                             }
                             <TableSearch handleSearch={this.handleSearch}/>
                             <TableList
+                                directionData={this.props.data}
                                 data={this.props.filteredData}
                                 onSort={this.props.sortData}
                                 selectItemHandler={this.selectItemHandler}
@@ -124,8 +132,8 @@ class App extends Component {
         console.log(rowSelected)
     }
 
-    handleAddingMode = () => {
-        this.props.isAdding()
+    handleShowAddForm = () => {
+        this.props.showAddForm()
     }
     /*getFilteredData() {
         const { data, search } = this.state
@@ -154,7 +162,7 @@ const mapDispatchToProps = dispatch => ({
     sortData: (sortField) => dispatch(sortData(sortField)),
     paginate: (page) => dispatch(paginate(page)),
     getSearchData: (search) => dispatch(getSearchData(search)),
-    isAdding: () => dispatch(isAdding())
+    showAddForm: () => dispatch(showAddForm())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));

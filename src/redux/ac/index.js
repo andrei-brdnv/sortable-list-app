@@ -2,7 +2,7 @@ import {
     FETCH_DATA,
     START,
     SUCCESS,
-    FAIL, SORT_DATA, ADD_USER_ITEM, PAGINATE, SEARCH, ADD_MODE
+    FAIL, SORT_DATA, ADD_USER_ITEM, PAGINATE, SEARCH, TOGGLE_ADD_FORM
 } from "../types";
 
 import { replace } from "connected-react-router";
@@ -61,10 +61,13 @@ export function fetchBigData() {
     }
 }
 
-export const sortData = (sortField) => ({
-    type: SORT_DATA,
-    payload: {sortField}
-})
+export const sortData = (sortField) => {
+    console.log('sortData')
+    return {
+        type: SORT_DATA,
+        payload: {sortField}
+    }
+}
 
 export const addUserItem = (userItem) => {
     return {
@@ -88,8 +91,8 @@ export const getSearchData = (search) => {
     }
 }
 
-export const isAdding = () => {
+export const showAddForm = () => {
     return {
-        type: ADD_MODE
+        type: TOGGLE_ADD_FORM
     }
 }
