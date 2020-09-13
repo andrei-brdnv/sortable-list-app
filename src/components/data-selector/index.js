@@ -1,11 +1,18 @@
 import React from "react";
-import Button from '@material-ui/core/Button';
+
+// Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import "./style.css"
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 
 const useStyles = makeStyles({
-    root: {
-        marginBottom: '10px'
+    buttonSmall: {
+        marginBottom: '10px',
+        backgroundColor: '#aed581'
+    },
+    buttonBig: {
+        backgroundColor: '#e57373'
     },
     container: {
         display: 'flex',
@@ -13,19 +20,32 @@ const useStyles = makeStyles({
         justifyContent: 'center',
         paddingTop: '100px'
     },
+    icon: {
+        marginRight: '10px'
+    }
 });
 
 export default (props) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.container}>
-            <Button className={classes.root} onClick={props.onSelectSmall} variant="contained" color="default">
-                Загрузить маленький объем данных (32 элемента)
+        <Container className={classes.container} maxWidth="sm">
+            <Button
+                className={classes.buttonSmall}
+                variant="contained"
+                onClick={props.onSelectSmall}
+            >
+                <GetAppRoundedIcon className={classes.icon} />
+                Загрузить маленький объем данных <b style={{ marginLeft: '5px' }}>(32 элемента)</b>
             </Button>
-            <Button onClick={props.onSelectBig} variant="contained" color="primary">
-                Загрузить большой объем данных (1000 элементов)
+            <Button
+                className={classes.buttonBig}
+                onClick={props.onSelectBig}
+                variant="contained"
+            >
+                <GetAppRoundedIcon className={classes.icon} />
+                Загрузить большой объем данных <b style={{ marginLeft: '5px' }}>(1000 элементов)</b>
             </Button>
-        </div>
+        </Container>
     )
 }

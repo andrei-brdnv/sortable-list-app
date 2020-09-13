@@ -1,6 +1,16 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {addUserItem} from "../../redux/ac";
+import "./style.css"
+import Button from "@material-ui/core/Button";
+
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+    button: {
+        borderRadius: 0
+    }
+});
 
 class TableForm extends Component {
     state = {
@@ -12,9 +22,10 @@ class TableForm extends Component {
     }
 
     render() {
+        const { classes } = this.props
         console.log('render TableForm')
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="form-container">
                 <div>
                     <input
                         className={this.getClassName('id')}
@@ -28,7 +39,7 @@ class TableForm extends Component {
                         className={this.getClassName('firstName')}
                         value={this.state.firstName}
                         onChange={this.handleChange('firstName')}
-                        placeholder="firstName..."
+                        placeholder="first name..."
                     />
                 </div>
                 <div>
@@ -36,7 +47,7 @@ class TableForm extends Component {
                         className={this.getClassName('lastName')}
                         value={this.state.lastName}
                         onChange={this.handleChange('lastName')}
-                        placeholder="lastName..."
+                        placeholder="last name..."
                     />
                 </div>
                 <div>
@@ -56,11 +67,15 @@ class TableForm extends Component {
                     />
                 </div>
                 <div>
-                    <button
+                    <Button
+                        className={classes.button}
+                        variant="contained"
+                        color="primary"
                         disabled={!this.isValidForm()}
+                        onClick={this.handleSubmit}
                     >
                         Add
-                    </button>
+                    </Button>
                 </div>
             </form>
         )
@@ -70,7 +85,7 @@ class TableForm extends Component {
 
     isValidField = (type) => this.state[type].length >= limits[type].min
 
-    getClassName = (type) => (this.isValidField(type) ? 'input' : 'input__error')
+    getClassName = (type) => (this.isValidField(type) ? 'input-form' : 'input-form__error')
 
     handleSubmit = (event) => {
         event.preventDefault()
@@ -96,23 +111,23 @@ class TableForm extends Component {
 const limits = {
     id: {
         min: 3,
-        max: 25
+        max: 20
     },
     firstName: {
         min: 3,
-        max: 25
+        max: 20
     },
     lastName: {
         min: 3,
-        max: 25
+        max: 20
     },
     email: {
         min: 3,
-        max: 25
+        max: 50
     },
     phone: {
         min: 3,
-        max: 25
+        max: 20
     }
 }
 
@@ -121,5 +136,5 @@ export default connect(
     (dispatch) => ({
         addUserItem: (userItem) => dispatch(addUserItem(userItem))
     })
-)(TableForm)
+)(withStyles(styles)(TableForm))
 

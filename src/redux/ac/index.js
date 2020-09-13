@@ -2,7 +2,7 @@ import {
     FETCH_DATA,
     START,
     SUCCESS,
-    FAIL, SORT_DATA, ADD_USER_ITEM, PAGINATE, SEARCH
+    FAIL, SORT_DATA, ADD_USER_ITEM, PAGINATE, SEARCH, ADD_MODE
 } from "../types";
 
 import { replace } from "connected-react-router";
@@ -85,5 +85,11 @@ export const getSearchData = (search) => {
     return {
         type: SEARCH,
         payload: {search}
+    }
+}
+
+export const isAdding = () => {
+    return {
+        type: ADD_MODE
     }
 }
