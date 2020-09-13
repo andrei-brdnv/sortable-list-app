@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 export default props => {
     const classes = useStyles()
 
-    const pageCount = Math.ceil(props.data.fetchedData.length / props.data.perPage)
+    const pageCount = Math.ceil(props.filteredData.length / props.data.perPage)
 
     return (
         <div className={classes.root}>

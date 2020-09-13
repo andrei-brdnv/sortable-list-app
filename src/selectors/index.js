@@ -7,22 +7,32 @@ export const paginationSelector = (store) => store.data
 export const filteredDataSelector = createSelector(
     fetchedDataSelector,
     filterSelector,
-    paginationSelector,
-    (fetchedData, search, data) => {
-        const indexOfLastPost = data.currentPage * data.perPage;
-        const indexOfFirstPost = indexOfLastPost - data.perPage;
-        const currentItems = data.fetchedData.slice(indexOfFirstPost, indexOfLastPost)
-
-
+    (fetchedData, search) => {
 
         if (!search) {
-            return currentItems
+            return fetchedData
         }
 
-        return currentItems.filter(item => {
+        return fetchedData.filter(item => {
             return item['firstName'].toLowerCase().includes(search.toLowerCase())
                 || item['lastName'].toLowerCase().includes(search.toLowerCase())
                 || item['email'].toLowerCase().includes(search.toLowerCase())
         })
     }
 )
+
+export const filteredDataPaginationSelector = createSelector(
+    filteredDataSelector,
+    paginationSelector,
+    (filteredData, data) => {
+        const indexOfLastPost = data.currentPage * data.perPage;
+        const indexOfFirstPost = indexOfLastPost - data.perPage;
+        const currentItems = filteredData.slice(indexOfFirstPost, indexOfLastPost);
+
+        return currentItems
+    }
+)
+
+
+
+

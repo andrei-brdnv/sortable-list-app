@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {fetchBigData, fetchSmallData, sortData, paginate, getSearchData} from "./redux/ac";
 import TableList from "./components/table-list";
 import DataSelector from "./components/data-selector"
-import {fetchedDataSelector, filteredDataSelector} from "./selectors";
+import {fetchedDataSelector, filteredDataPaginationSelector, filteredDataSelector} from "./selectors";
 import { orderBy, chunk } from "lodash";
 import TableForm from "./components/data-form";
 import Pagination from "./components/pagination";
@@ -52,7 +52,7 @@ class App extends Component {
                 />
                 <Pagination
                     data={this.props.data}
-                    filteredData={this.props.filteredData}
+                    filteredData={this.props.dataForPaginator}
                     handlePageClick={this.handlePageClick}
                 />
             </div>
@@ -86,7 +86,8 @@ class App extends Component {
 
 const mapStateToProps = store => ({
     data: store.data,
-    filteredData: filteredDataSelector(store)
+    dataForPaginator: filteredDataSelector(store),
+    filteredData: filteredDataPaginationSelector(store)
 })
 
 const mapDispatchToProps = dispatch => ({
