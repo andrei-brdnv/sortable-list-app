@@ -8,13 +8,15 @@ import { orderBy, chunk } from "lodash";
 import TableForm from "./components/data-form";
 import Pagination from "./components/pagination";
 import TableSearch from "./components/table-search";
-
-
+import ItemDetails from "./components/item-details";
+import Loader from "./components/loader";
+import Container from '@material-ui/core/Container';
 
 
 class App extends Component {
     state = {
-        search: ''
+        search: '',
+        rowSelected: null
     }
 
     render() {
@@ -27,12 +29,18 @@ class App extends Component {
 
         if (!this.props.data.isDataSelected) {
             return (
-                <div>
+                <Container maxWidth="sm">
                     <DataSelector
                         onSelectSmall={this.props.fetchSmallData}
                         onSelectBig={this.props.fetchBigData}
                     />
-                </div>
+                </Container>
+            )
+        }
+
+        if (this.props.data.loading) {
+            return (
+                <Loader />
             )
         }
 
@@ -49,12 +57,21 @@ class App extends Component {
                 <TableList
                     data={this.props.filteredData}
                     onSort={this.props.sortData}
+                    selectItemHandler={this.selectItemHandler}
+                    handleRowClick={this.handleRowClick}
                 />
                 <Pagination
                     data={this.props.data}
                     filteredData={this.props.dataForPaginator}
                     handlePageClick={this.handlePageClick}
                 />
+                {
+                    this.state.rowSelected
+                        ? <ItemDetails
+                            item={this.state.rowId}
+                        />
+                        : null
+                }
             </div>
         );
     }
@@ -69,6 +86,10 @@ class App extends Component {
         this.props.getSearchData(search)
     }
 
+    handleRowClick = rowSelected => {
+        this.setState({ rowSelected })
+        console.log(rowSelected)
+    }
     /*getFilteredData() {
         const { data, search } = this.state
 

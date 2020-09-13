@@ -1,0 +1,7 @@
+.data-mode-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+
+}

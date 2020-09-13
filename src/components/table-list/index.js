@@ -9,7 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import DataItem from "../data-item"
 
 const useStyles = makeStyles({
     table: {
@@ -33,9 +32,15 @@ export default props => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <DataItem
-                        data={props.data}
-                    />
+                    {props.data.map(item =>
+                        <TableRow key={item.phone} onClick={() => props.handleRowClick(item)}>
+                            <TableCell component="th" scope="row">{item.id}</TableCell>
+                            <TableCell align="right">{item.firstName}</TableCell>
+                            <TableCell align="right">{item.lastName}</TableCell>
+                            <TableCell align="right">{item.email}</TableCell>
+                            <TableCell align="right">{item.phone}</TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>
