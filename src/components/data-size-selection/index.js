@@ -1,5 +1,5 @@
 import React from "react";
-import {smallUrl, bigUrl} from "../../redux/utils";
+import { smallUrl, bigUrl } from "../../redux/utils";
 
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";

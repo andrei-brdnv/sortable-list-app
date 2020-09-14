@@ -9,14 +9,16 @@ export const tableDataSelector = createSelector(
     dataSelector,
     searchSelector,
     (fetchedData, search) => {
-        // Если в поиске ничего нет, то возращаем данные с сервера
+        // Если в поиске ничего нет, то возвращаем данные с сервера
         if (!search) {
             return fetchedData
         }
 
-        // Фильтрация данных при поиска, проверка на наличие подстроки
+        // Фильтрация данных при поиске, проверка на наличие подстроки
         return fetchedData.filter(item => {
-            return item['firstName'].toLowerCase().includes(search.toLowerCase())
+            return item['id'].toString().includes(search.toString())
+                || item['phone'].toString().includes(search.toString())
+                || item['firstName'].toLowerCase().includes(search.toLowerCase())
                 || item['lastName'].toLowerCase().includes(search.toLowerCase())
                 || item['email'].toLowerCase().includes(search.toLowerCase())
         })

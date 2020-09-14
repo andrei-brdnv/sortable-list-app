@@ -88,7 +88,6 @@ export const dataReducer = (state = initialState, action) => {
                 rowSelected: payload.rowSelected
             }
 
-
         default:
             return state
     }

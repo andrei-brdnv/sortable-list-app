@@ -24,7 +24,11 @@ export default props => {
 
     return (
         <div className="search-container">
-            <Button className={classes.button} variant="contained" onClick={() => props.handleSearchClick(value)}>
+            <Button
+                className={classes.button}
+                variant="contained"
+                onClick={() => props.handleSearchClick(value)}
+            >
                 Найти
             </Button>
             <input
@@ -32,7 +36,7 @@ export default props => {
                 type="text"
                 onChange={handleChange}
                 value={value}
-                placeholder="Поиск..."
+                placeholder="поиск..."
             />
         </div>
     )

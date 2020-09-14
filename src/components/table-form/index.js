@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "./style.css"
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { addTableRow } from "../../redux/ac";
 
 // Material UI
@@ -27,7 +27,7 @@ class TableForm extends Component {
 
     render() {
         const { classes } = this.props
-        console.log('render TableForm')
+
         return (
             <form className="form-container">
                 <div>

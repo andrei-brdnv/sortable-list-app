@@ -22,15 +22,13 @@ export default ({item}) => {
     const classes = useStyles()
 
     return (
-        <Paper className={classes.container} variant="outlined">
-            <div>
-                <div>Выбран пользователь <b>{item.firstName + ' ' + item.lastName}</b></div>
-                <div>Описание: <br/><textarea defaultValue={item.description} /></div>
-                <div>Адрес проживания: <b>{item.address.streetAddress}</b></div>
-                <div>Город: <b>{item.address.city}</b></div>
-                <div>Провинция/штат: <b>{item.address.state}</b></div>
-                <div>Индекс: <b>{item.address.zip}</b></div>
-            </div>
+        <Paper className={classes.container} elevation={6}>
+            <div>Выбран пользователь <b>{item.firstName + ' ' + item.lastName}</b></div>
+            <div>Описание: <br/><textarea defaultValue={item.description}/></div>
+            <div>Адрес проживания: <b>{item.address.streetAddress}</b></div>
+            <div>Город: <b>{item.address.city}</b></div>
+            <div>Провинция/штат: <b>{item.address.state}</b></div>
+            <div>Индекс: <b>{item.address.zip}</b></div>
         </Paper>
     )
 }
