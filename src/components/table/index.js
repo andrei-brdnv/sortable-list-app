@@ -1,16 +1,16 @@
 import React from "react";
+import "./style.css"
 
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Material UI
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import "./style.css"
-
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -28,47 +28,49 @@ const StyledTableCell = withStyles((theme) => ({
 const StyledTableRow = withStyles((theme) => ({
     root: {
         '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: '#eeeeee',
             cursor: 'pointer'
         },
     },
 }))(TableRow);
 
 export default props => {
+    const {data, sortData: {sortField, sort}} = props
+
     return (
         <TableContainer>
             <Table size="small" aria-label="a dense table">
                 <TableHead>
                     <StyledTableRow>
                         <StyledTableCell onClick={() => props.onSort('id')}>
-                            ID {props.directionData.sort === 'asc'
+                            ID {sortField === 'id' && sort === 'asc'
                             ? <FontAwesomeIcon className="icon" icon="angle-up"/>
                             : <FontAwesomeIcon className="icon" icon="angle-down"/>}
                         </StyledTableCell>
                         <StyledTableCell onClick={() => props.onSort('firstName')} align="left">
-                            First name {props.directionData.sort === 'asc'
+                            First name {sortField === 'firstName' && sort === 'asc'
                             ? <FontAwesomeIcon className="icon" icon="angle-up"/>
                             : <FontAwesomeIcon className="icon" icon="angle-down"/>}
                         </StyledTableCell>
                         <StyledTableCell onClick={() => props.onSort('lastName')} align="left">
-                            Last name {props.directionData.sort === 'asc'
+                            Last name {sortField === 'lastName' && sort === 'asc'
                             ? <FontAwesomeIcon className="icon" icon="angle-up"/>
                             : <FontAwesomeIcon className="icon" icon="angle-down"/>}
                         </StyledTableCell>
                         <StyledTableCell onClick={() => props.onSort('email')} align="left">
-                            Email {props.directionData.sort === 'asc'
+                            Email {sortField === 'email' && sort === 'asc'
                             ? <FontAwesomeIcon className="icon" icon="angle-up"/>
                             : <FontAwesomeIcon className="icon" icon="angle-down"/>}
                         </StyledTableCell>
                         <StyledTableCell onClick={() => props.onSort('phone')} align="left">
-                            Phone {props.directionData.sort === 'asc'
+                            Phone {sortField === 'phone' && sort === 'asc'
                             ? <FontAwesomeIcon className="icon" icon="angle-up"/>
                             : <FontAwesomeIcon className="icon" icon="angle-down"/>}
                         </StyledTableCell>
                     </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                    {props.data.map(item =>
+                    {data.map(item =>
                         <StyledTableRow key={item.phone} onClick={() => props.handleRowClick(item)}>
                             <StyledTableCell component="th" scope="row">{item.id}</StyledTableCell>
                             <StyledTableCell align="left">{item.firstName}</StyledTableCell>

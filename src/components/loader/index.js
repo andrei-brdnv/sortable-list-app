@@ -5,7 +5,6 @@ import Loader from "react-loader-spinner";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-
 const useStyles = makeStyles({
     container: {
         display: 'flex',

@@ -13,16 +13,16 @@
     margin-bottom: 5px;
     line-height: 36px;
     font-size: 14px;
-    border: 2px solid #bdbdbd;
+    border: 2px solid #757575;
     outline: none;
 }
 
 .input-form:focus {
     padding-left: 6px;
-    border: 2px solid #9ccc65;
+    border: 2px solid #43a047;
 }
 
 .input-form__error:focus {
     padding-left: 6px;
-    border: 2px solid #ef5350;
+    border: 2px solid #e53935;
 }

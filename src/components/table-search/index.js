@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./style.css"
 
 //Material UI
@@ -9,7 +9,8 @@ const useStyles = makeStyles({
     button: {
         borderRadius: 0,
         boxShadow: 'none',
-        backgroundColor: '#ffa726'
+        color: '#f9f9f9',
+        backgroundColor: '#757575'
     }
 });
 
@@ -18,13 +19,12 @@ export default props => {
     const [value, setValue] = useState('')
 
     const handleChange = event => {
-        console.log(value)
         setValue(event.target.value)
     }
 
     return (
         <div className="search-container">
-            <Button className={classes.button} variant="contained" onClick={() => props.handleSearch(value)}>
+            <Button className={classes.button} variant="contained" onClick={() => props.handleSearchClick(value)}>
                 Найти
             </Button>
             <input

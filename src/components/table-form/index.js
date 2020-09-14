@@ -1,16 +1,18 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
-import {addUserItem} from "../../redux/ac";
 import "./style.css"
-import Button from "@material-ui/core/Button";
+import {connect} from "react-redux";
+import { addTableRow } from "../../redux/ac";
 
+// Material UI
 import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
     button: {
         borderRadius: 0,
         margin: '10px auto',
-        backgroundColor: '#9ccc65'
+        color: '#ffffff',
+        backgroundColor: '#43a047'
     }
 });
 
@@ -90,7 +92,7 @@ class TableForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        this.props.addUserItem(this.state)
+        this.props.addTableRow(this.state)
         this.setState({
             id: '',
             firstName: '',
@@ -135,7 +137,7 @@ const limits = {
 export default connect(
     null,
     (dispatch) => ({
-        addUserItem: (userItem) => dispatch(addUserItem(userItem))
+        addTableRow: (newRow) => dispatch(addTableRow(newRow))
     })
 )(withStyles(styles)(TableForm))
 

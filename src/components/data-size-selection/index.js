@@ -1,4 +1,5 @@
 import React from "react";
+import {smallUrl, bigUrl} from "../../redux/utils";
 
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,11 +8,17 @@ import Button from '@material-ui/core/Button';
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 
 const useStyles = makeStyles({
-    button: {
+    buttonSmall: {
         display: 'flex',
         justifyContent: 'left',
         marginBottom: '20px',
-        backgroundColor: '#9ccc65'
+        backgroundColor: '#a5d6a7'
+    },
+    buttonBig: {
+        display: 'flex',
+        justifyContent: 'left',
+        marginBottom: '20px',
+        backgroundColor: '#ffcc80'
     },
     container: {
         display: 'flex',
@@ -30,17 +37,19 @@ export default (props) => {
     return (
         <Container className={classes.container} maxWidth="sm">
             <Button
-                className={classes.button}
+                className={classes.buttonSmall}
                 variant="contained"
-                onClick={props.onSelectSmall}
+                size="large"
+                onClick={() => props.selectData(smallUrl)}
             >
                 <GetAppRoundedIcon className={classes.icon} />
                 Загрузить маленький объем данных <b style={{ marginLeft: '5px' }}>(32 элемента)</b>
             </Button>
             <Button
-                className={classes.button}
-                onClick={props.onSelectBig}
+                className={classes.buttonBig}
                 variant="contained"
+                size="large"
+                onClick={() => props.selectData(bigUrl)}
             >
                 <GetAppRoundedIcon className={classes.icon} />
                 Загрузить большой объем данных <b style={{ marginLeft: '5px' }}>(1000 элементов)</b>

@@ -1,9 +1,10 @@
 export const FETCH_DATA = 'FETCH_DATA'
-export const ADD_USER_ITEM = 'ADD_USER_ITEM'
+export const ADD_TABLE_ROW = 'ADD_TABLE_ROW'
 export const SORT_DATA = 'SORT_DATA'
-export const PAGINATE = 'PAGINATE'
-export const SEARCH = 'SEARCH'
+export const CHANGE_PAGINATION_PAGE = 'CHANGE_PAGINATION_PAGE'
+export const SEARCH_DATA = 'SEARCH_DATA'
 export const TOGGLE_ADD_FORM = 'TOGGLE_ADD_FORM'
+export const SELECT_ROW = 'SELECT_ROW'
 
 export const START = '_START'
 export const SUCCESS = '_SUCCESS'

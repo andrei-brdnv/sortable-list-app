@@ -1,18 +1,20 @@
 import { createSelector } from "reselect";
 
-export const fetchedDataSelector = (store) => store.data.fetchedData
-export const filterSelector = (store) => store.data.search
-export const paginationSelector = (store) => store.data
+export const dataSelector = (store) => store.data.fetchedData
+export const searchSelector = (store) => store.data.search
+export const paginationSelector = (store) => store.pageData
 
-export const filteredDataSelector = createSelector(
-    fetchedDataSelector,
-    filterSelector,
+// Фильтрация данных при поиске элемента для отображения в таблице
+export const tableDataSelector = createSelector(
+    dataSelector,
+    searchSelector,
     (fetchedData, search) => {
-
+        // Если в поиске ничего нет, то возращаем данные с сервера
         if (!search) {
             return fetchedData
         }
 
+        // Фильтрация данных при поиска, проверка на наличие подстроки
         return fetchedData.filter(item => {
             return item['firstName'].toLowerCase().includes(search.toLowerCase())
                 || item['lastName'].toLowerCase().includes(search.toLowerCase())
@@ -21,15 +23,16 @@ export const filteredDataSelector = createSelector(
     }
 )
 
-export const filteredDataPaginationSelector = createSelector(
-    filteredDataSelector,
+// Пагинация с учетом отфильтрованных элементов при поиске
+export const pageDataSelector = createSelector(
+    tableDataSelector,
     paginationSelector,
-    (filteredData, data) => {
-        const indexOfLastPost = data.currentPage * data.perPage;
-        const indexOfFirstPost = indexOfLastPost - data.perPage;
-        const currentItems = filteredData.slice(indexOfFirstPost, indexOfLastPost);
+    (searchedData, pageData) => {
+        const indexOfLastPost = pageData.currentPage * pageData.perPage;
+        const indexOfFirstPost = indexOfLastPost - pageData.perPage;
+        const currentList = searchedData.slice(indexOfFirstPost, indexOfLastPost);
 
-        return currentItems
+        return currentList
     }
 )
 

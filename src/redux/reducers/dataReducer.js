@@ -1,6 +1,16 @@
-import {FAIL, FETCH_DATA, SORT_DATA, START, SUCCESS, ADD_USER_ITEM, PAGINATE, SEARCH, TOGGLE_ADD_FORM} from "../types";
+import {
+    START,
+    SUCCESS,
+    FAIL,
+    FETCH_DATA,
+    SORT_DATA,
+    ADD_TABLE_ROW,
+    SEARCH_DATA,
+    TOGGLE_ADD_FORM,
+    SELECT_ROW
+} from "../types";
 
-import {orderBy, chunk} from "lodash";
+import { orderBy } from "lodash";
 
 const initialState = {
     fetchedData: [],
@@ -10,11 +20,9 @@ const initialState = {
     isDataSelected: false,
     sort: '',
     sortField: '',
-    currentPage: 1,
-    perPage: 50,
-    currentItems: [],
     search: '',
-    showAddForm: false
+    showAddForm: false,
+    rowSelected: null
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -23,12 +31,12 @@ export const dataReducer = (state = initialState, action) => {
     switch (type) {
         case FETCH_DATA + START:
             return {
-                ...state, loading: true, isDataSelected: true
+                ...state,
+                loading: true,
+                isDataSelected: true
             }
 
         case FETCH_DATA + SUCCESS:
-
-
             return {
                 ...state,
                 fetchedData: response,
@@ -45,38 +53,41 @@ export const dataReducer = (state = initialState, action) => {
             }
 
         case SORT_DATA:
-            const stateCopy = state.fetchedData
-            const sortType = state.sort === 'asc' ? 'desc' : 'asc'
-            const orderedData = orderBy(stateCopy, payload.sortField, sortType)
-            console.log(orderedData)
+            const stateCopy = [...state.fetchedData]
+            const sort = state.sort === 'asc' ? 'desc' : 'asc'
+            const reorderedData = orderBy(stateCopy, payload.sortField, sort)
+
             return {
                 ...state,
-                fetchedData: orderedData,
-                sort: sortType,
+                fetchedData: reorderedData,
+                sort: sort,
                 sortField: payload.sortField
             }
 
-        case ADD_USER_ITEM:
+        case ADD_TABLE_ROW:
             return {
                 ...state,
-                fetchedData: [payload.userItem, ...state.fetchedData]
+                fetchedData: [payload.newRow, ...state.fetchedData]
             }
 
-        case PAGINATE:
-            return {
-                ...state,
-                currentPage: payload.page,
-            }
-        case SEARCH:
+        case SEARCH_DATA:
             return {
                 ...state,
                 search: payload.search
             }
+
         case TOGGLE_ADD_FORM:
             return {
                 ...state,
                 showAddForm: !state.showAddForm
             }
+
+        case SELECT_ROW:
+            return {
+                ...state,
+                rowSelected: payload.rowSelected
+            }
+
 
         default:
             return state

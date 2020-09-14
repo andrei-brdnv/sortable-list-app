@@ -1,6 +1,8 @@
 import React from "react";
+
+// Material UI
+import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     container: {
@@ -9,7 +11,7 @@ const useStyles = makeStyles({
         justifyContent: 'left',
         maxWidth: '500px',
         margin: '0 auto 50px auto',
-        padding: '20px',
+        padding: '20px 20px 15px 20px',
         '& div': {
             marginBottom: '5px'
         }

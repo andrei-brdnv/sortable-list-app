@@ -12,17 +12,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
-
 export default props => {
     const classes = useStyles()
-    const pageCount = Math.ceil(props.filteredData.length / props.data.perPage)
+    const pageCount = Math.ceil(props.dataForPagination.length / props.pageData.perPage)
 
     return (
         <div className={classes.container}>
             <Pagination
                 count={pageCount}
-                page={props.data.currentPage}
+                page={props.pageData.currentPage}
                 onChange={props.handlePageClick}
                 color="primary"
             />

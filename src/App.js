@@ -1,25 +1,25 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import {fetchBigData, fetchSmallData, sortData, paginate, getSearchData, showAddForm} from "./redux/ac";
-import TableList from "./components/table-list";
-import DataSelector from "./components/data-selector"
-import {fetchedDataSelector, filteredDataPaginationSelector, filteredDataSelector} from "./selectors";
-import { orderBy, chunk } from "lodash";
-import TableForm from "./components/data-form";
-import Pagination from "./components/pagination";
-import TableSearch from "./components/table-search";
-import ItemDetails from "./components/item-details";
+import "./App.css"
+import DataSize from "./components/data-size-selection"
 import Loader from "./components/loader";
+import TableForm from "./components/table-form";
+import TableSearch from "./components/table-search";
+import Table from "./components/table";
+import Pagination from "./components/pagination";
+import TableRowDetails from "./components/table-row-details";
+
+import { connect } from "react-redux";
+import { fetchData, sortData, changePage, searchData, showAddForm, selectRow } from "./redux/ac";
+import { tableDataSelector, pageDataSelector } from "./selectors";
+
 import Container from '@material-ui/core/Container';
 import Button from "@material-ui/core/Button";
-import "./App.css"
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { withStyles } from "@material-ui/core/styles";
 
 library.add(faAngleUp, faAngleDown)
-
-
 
 const styles = theme => ({
     container: {
@@ -31,138 +31,90 @@ const styles = theme => ({
         width: '250px',
         margin: '20px auto',
         borderRadius: 0,
-        backgroundColor: '#ffa726'
     }
 });
 
 class App extends Component {
-    state = {
-        search: '',
-        rowSelected: null,
-
-    }
-
     render() {
+        const { data, classes } = this.props
 
-        const { classes } = this.props
         return (
             <Container className={classes.container}>
-                {
-                    !this.props.data.isDataSelected ?
-                        <DataSelector
-                            onSelectSmall={this.props.fetchSmallData}
-                            onSelectBig={this.props.fetchBigData}
-                        /> : null
+                {!data.isDataSelected ?
+                    <DataSize
+                        selectData={this.props.fetchData}
+                    /> : null
                 }
 
-                {
-                    this.props.data.loading ? <Loader /> : null
-                }
+                {data.loading ? <Loader /> : null}
 
-                {
-                    this.props.data.loaded ? (
-                        <Fragment>
-                            <Button className={classes.isAddingButton} variant="contained" onClick={this.handleShowAddForm}>Добавить ряд в таблицу</Button>
-                            {
-                                this.props.data.showAddForm ? <TableForm /> : null
-                            }
-                            <TableSearch handleSearch={this.handleSearch}/>
-                            <TableList
-                                directionData={this.props.data}
-                                data={this.props.filteredData}
-                                onSort={this.props.sortData}
-                                selectItemHandler={this.selectItemHandler}
-                                handleRowClick={this.handleRowClick}
-                            />
-                            <Pagination
-                                data={this.props.data}
-                                filteredData={this.props.dataForPaginator}
-                                handlePageClick={this.handlePageClick}
-                            />
-                        </Fragment>
-
-                    )
-                         : null
-                }
-                {/*<button onClick={() => this.props.fetchSmallData()}>
-                    Загрузить маленький объем данных (32 элемента)
-                </button>
-                <button onClick={() => this.props.fetchBigData()}>Загрузить большой объем данных (1000 элементов)</button>*/}
-
-                {
-                    this.state.rowSelected
-                        ? <ItemDetails
-                            item={this.state.rowSelected}
+                {data.loaded ? (
+                    <Fragment>
+                        <Button className={classes.isAddingButton} variant="contained" color="primary"
+                                onClick={this.handleShowAddForm}>Добавить ряд в таблицу</Button>
+                        {
+                            data.showAddForm ? <TableForm /> : null
+                        }
+                        <TableSearch handleSearchClick={this.handleSearchClick}/>
+                        <Table
+                            sortData={data}
+                            data={this.props.dataForTable}
+                            onSort={this.props.sortData}
+                            selectItemHandler={this.selectItemHandler}
+                            handleRowClick={this.handleRowClick}
                         />
-                        : null
+                        <Pagination
+                            pageData={this.props.pageData}
+                            dataForPagination={this.props.dataForPagination}
+                            handlePageClick={this.handlePageClick}
+                        />
+                    </Fragment>) : null
+                }
+
+                {data.rowSelected
+                    ? <TableRowDetails
+                        item={data.rowSelected}
+                    /> : null
                 }
             </Container>
-            )
-
-        /*const indexOfLastPost = this.props.data.currentPage * this.props.data.perPage;
-        const indexOfFirstPost = indexOfLastPost - this.props.data.perPage;
-        const currentItems = this.props.data.fetchedData.slice(indexOfFirstPost, indexOfLastPost)*/
-
-        /*const filteredData = this.getFilteredData();
-        const pageCount = Math.ceil(filteredData.length / perPage)*/
-
-        /*if (!this.props.data.isDataSelected) {
-            return (
-                <DataSelector
-                    onSelectSmall={this.props.fetchSmallData}
-                    onSelectBig={this.props.fetchBigData}
-                />
-            )
-        }*/
-
+        )
     }
 
+    // Пагинация
     handlePageClick = (event, value) => {
-        console.log(value)
-        this.props.paginate(value)
+        this.props.changePage(value)
     }
 
-    handleSearch = search => {
-        console.log(search)
-        this.props.getSearchData(search)
+    // Поиск элемента
+    handleSearchClick = search => {
+        this.props.searchData(search)
     }
 
+    // Выбор элемента для отображения под таблицей
     handleRowClick = rowSelected => {
-        this.setState({ rowSelected })
-        console.log(rowSelected)
+        this.props.selectRow(rowSelected)
     }
 
+    // Показ формы для добавления элемента в таблицу
     handleShowAddForm = () => {
         this.props.showAddForm()
     }
-    /*getFilteredData() {
-        const { data, search } = this.state
-
-        if (!search) {
-            return data
-        }
-
-        return data.filter(item => {
-            return item['firstName'].toLowerCase().includes(search.toLowerCase())
-                || item['lastName'].toLowerCase().includes(search.toLowerCase())
-                || item['email'].toLowerCase().includes(search.toLowerCase())
-        })
-    }*/
 }
 
 const mapStateToProps = store => ({
     data: store.data,
-    dataForPaginator: filteredDataSelector(store),
-    filteredData: filteredDataPaginationSelector(store)
+    pageData: store.pageData,
+    dataForPagination: tableDataSelector(store),
+    dataForTable: pageDataSelector(store)
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchSmallData: () => dispatch(fetchSmallData()),
-    fetchBigData: () => dispatch(fetchBigData()),
+    fetchData: (url) => dispatch(fetchData(url)),
     sortData: (sortField) => dispatch(sortData(sortField)),
-    paginate: (page) => dispatch(paginate(page)),
-    getSearchData: (search) => dispatch(getSearchData(search)),
-    showAddForm: () => dispatch(showAddForm())
+    changePage: (page) => dispatch(changePage(page)),
+    searchData: (search) => dispatch(searchData(search)),
+    showAddForm: () => dispatch(showAddForm()),
+    selectRow: (rowSelected) => dispatch(selectRow(rowSelected))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));
