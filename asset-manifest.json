@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/sortable-list-app/static/css/main.22e356ac.chunk.css",
-    "main.js": "/sortable-list-app/static/js/main.46baaf65.chunk.js",
-    "main.js.map": "/sortable-list-app/static/js/main.46baaf65.chunk.js.map",
+    "main.js": "/sortable-list-app/static/js/main.c4424b4e.chunk.js",
+    "main.js.map": "/sortable-list-app/static/js/main.c4424b4e.chunk.js.map",
     "runtime-main.js": "/sortable-list-app/static/js/runtime-main.06aa31e9.js",
     "runtime-main.js.map": "/sortable-list-app/static/js/runtime-main.06aa31e9.js.map",
     "static/js/2.d3eec6fa.chunk.js": "/sortable-list-app/static/js/2.d3eec6fa.chunk.js",
     "static/js/2.d3eec6fa.chunk.js.map": "/sortable-list-app/static/js/2.d3eec6fa.chunk.js.map",
     "index.html": "/sortable-list-app/index.html",
-    "precache-manifest.f188e134e33223f144966549f07e9199.js": "/sortable-list-app/precache-manifest.f188e134e33223f144966549f07e9199.js",
+    "precache-manifest.d5d84785b85d930421d66daf12ef5e13.js": "/sortable-list-app/precache-manifest.d5d84785b85d930421d66daf12ef5e13.js",
     "service-worker.js": "/sortable-list-app/service-worker.js",
     "static/css/main.22e356ac.chunk.css.map": "/sortable-list-app/static/css/main.22e356ac.chunk.css.map",
     "static/js/2.d3eec6fa.chunk.js.LICENSE.txt": "/sortable-list-app/static/js/2.d3eec6fa.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.06aa31e9.js",
     "static/js/2.d3eec6fa.chunk.js",
     "static/css/main.22e356ac.chunk.css",
-    "static/js/main.46baaf65.chunk.js"
+    "static/js/main.c4424b4e.chunk.js"
   ]
 }
